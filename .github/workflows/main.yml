@@ -1,0 +1,20 @@
+name: First Workflow 
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  hello-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print a welcome message 
+        run: echo "Welcome to github actions"
+
+      - name: Checkout repo contnet 
+        uses: actions/checkout@v6.0.3
+
+      - name: list repo files
+        run: ls -la
