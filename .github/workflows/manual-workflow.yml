@@ -1,0 +1,42 @@
+name: manual-workflow.yaml
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Select the environment to deploy to"
+        required: true
+        default: "staging"
+        type: choice
+        options:
+          - staging
+          - production
+          - development
+
+      release_version:
+        description: "Enter the release version"
+        required: false
+        default: "1.0.0"
+        type: string
+
+      run_migrations:
+        description: "Run database migrations?"
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to server
+        run: |
+          echo "Deploying version ${{ inputs.release_version }}"
+          echo "Environment: ${{ inputs.environment }}"
+
+          if [ "${{ inputs.run_migrations }}" == "true" ]; then
+            echo "Running database migrations..."
+          else
+            echo "Skipping database migrations."
+          fi
