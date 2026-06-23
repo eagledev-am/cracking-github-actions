@@ -11,8 +11,8 @@ jobs:
   deploy:
     name: Deploy to Docker
     if: >
-        ${{ github.event.workflow_run.conclusion == 'success'
-        && github.event.workflow_run.head_branch == 'main' }}
+      ${{ github.event.workflow_run.conclusion == 'success'
+      && github.event.workflow_run.head_branch == 'main' }}
 
     runs-on: ubuntu-latest
 
@@ -36,11 +36,9 @@ jobs:
 
       - name: Build docker image
         run: |
-          docker build \
-          -t ${{ secrets.DOCKER_USERNAME }}/spring-app:${{ github.event.workflow_run.head_sha }} \ 
-          -t ${{ secrets.DOCKER_USERNAME }}/spring-app:latest .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/spring-app:${{ github.event.workflow_run.head_sha }} -t ${{ secrets.DOCKER_USERNAME }}/spring-app:latest .
 
       - name: push docker image
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/spring-app:${{ github.event.workflow_run.head_sha }} 
-          docker push ${{ secrets.DOCKER_USERNAME }}/spring-app:latest 
+          docker push ${{ secrets.DOCKER_USERNAME }}/spring-app:${{ github.event.workflow_run.head_sha }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/spring-app:latest
