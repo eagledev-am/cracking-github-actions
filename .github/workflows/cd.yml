@@ -17,6 +17,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: checkout sourcecode
+        uses: actions/checkout@v4
+
       - name: Download artifact
         uses: dawidd6/action-download-artifact@v3
         with:
@@ -25,8 +28,6 @@ jobs:
           name: spring-boot-app
           path: target
 
-      - name: checkout sourcecode
-        uses: actions/checkout@v4
 
       - name: Login to DockerHub
         uses: docker/login-action@v3
